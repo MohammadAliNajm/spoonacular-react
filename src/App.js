@@ -8,7 +8,7 @@ import ItemList from './components/ItemList';
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
-const apiKey = process.env.api_key;
+const apiKey = process.env.REACT_APP_API_KEY;
   const handleSearch = async (term) => {
     setSearchTerm(term);
     
@@ -21,9 +21,11 @@ const apiKey = process.env.api_key;
   };
 
   return (
-    <div >
+    <div > <h2 style={{color:"green" }}>Search for Grocery Products</h2>
         <SearchBar onSearch={handleSearch} />
-      <ItemList items={items} searchTerm={searchTerm} />
+      {items == [] ? <h4>No Items Found!</h4> : <ItemList items={items} searchTerm={searchTerm} />}
+     
+     
     </div>
   );
 }
