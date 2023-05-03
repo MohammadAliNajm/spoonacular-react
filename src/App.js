@@ -8,16 +8,25 @@ import ItemList from './components/ItemList';
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
-const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const handleSearch = async (term) => {
     setSearchTerm(term);
     
-    const response = await axios.get(
+    // const response = await axios.get(
     
-      `https://api.spoonacular.com/food/products/search?apiKey=${apiKey}&query=${term}&number=10`,
+    //   `https://api.spoonacular.com/food/products/search?apiKey=${apiKey}&query=${term}&number=10`,
       
-    );
-    setItems(response.data.products);
+    // );
+    // setItems(response.data.products);
+    
+    fetch('https://api.spoonacular.com/food/products/search?apiKey='+apiKey+'&query='+term+'&number=10').then((respone) => respone.json()).
+    then(
+      (response) => {
+         console.log(response.products);
+          setItems(response.products) })
+     
+   
+    
   };
 
   return (
